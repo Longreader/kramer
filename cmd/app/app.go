@@ -3,107 +3,101 @@ package main
 import (
 	"KramerSolve/internal/models"
 	"KramerSolve/internal/processor"
-	"fmt"
 )
 
 func main() {
 
 	x := []models.Value{
 		models.Value{
-			Content: "H1",
-			Sign:    false,
-		},
-		models.Value{
-			Content: "H2",
+			Content: "M_зат",
 			Sign:    true,
 		},
 		models.Value{
 			Content: "0",
+			Sign:    true,
+		},
+		models.Value{
+			Content: "0",
+			Sign:    true,
+		},
+		models.Value{
+			Content: "0",
+			Sign:    true,
+		},
+	}
+	y := []models.Value{
+		models.Value{
+			Content: "M_ств*(r/R)",
+			Sign:    true,
+		},
+		models.Value{
+			Content: "M_ств*(1-(r/R))",
 			Sign:    true,
 		},
 		models.Value{
 			Content: "1",
 			Sign:    false,
 		},
-	}
-	y := []models.Value{
 		models.Value{
-			Content: "B1",
-			Sign:    false,
-		},
-		models.Value{
-			Content: "B2",
-			Sign:    true,
-		},
-		models.Value{
-			Content: "B3",
-			Sign:    true,
-		},
-		models.Value{
-			Content: "B4",
+			Content: "0",
 			Sign:    true,
 		},
 	}
 	z := []models.Value{
 		{
-			Content: "F1",
+			Content: "0",
 			Sign:    true,
 		},
 		{
-			Content: "F2",
+			Content: "M_кол",
 			Sign:    true,
 		},
 		{
-			Content: "F3",
+			Content: "1",
 			Sign:    true,
 		},
 		{
-			Content: "F4",
-			Sign:    true,
+			Content: "1",
+			Sign:    false,
 		},
 	}
 	k := []models.Value{
 		{
-			Content: "L1",
+			Content: "J_кол/R",
+			Sign:    true,
+		},
+		{
+			Content: "-(J_кол/R)",
+			Sign:    true,
+		},
+		{
+			Content: "r",
 			Sign:    false,
 		},
 		{
-			Content: "L2",
-			Sign:    false,
-		},
-		{
-			Content: "L3",
-			Sign:    false,
-		},
-		{
-			Content: "L4",
-			Sign:    false,
+			Content: "R",
+			Sign:    true,
 		},
 	}
 	res := []models.Value{
 		{
-			Content: "P1-I1",
+			Content: "P-П_зат_отк(х_1)",
+			Sign:    true,
+		},
+		{
+			Content: "П_ств_отк(х_1,x_2)",
+			Sign:    false,
+		},
+		{
+			Content: "П_кол_отк(x_2)",
 			Sign:    false,
 		},
 		{
 			Content: "0",
 			Sign:    true,
 		},
-		{
-			Content: "P3+P3",
-			Sign:    true,
-		},
-		{
-			Content: "5",
-			Sign:    true,
-		},
 	}
 
-	result := processor.KramerRangFour(x, y, z, k, res)
+	_ = processor.KramerRangFour(x, y, z, k, res)
 
-	for _, value := range result {
-		fmt.Println("***************")
-		fmt.Println(value.String())
-		fmt.Println("***************")
-	}
 }

@@ -14,8 +14,9 @@ func (v Value) Multiply(other Value) Value {
 }
 
 func (v Value) Divide(other Value) Value {
-	other.Content = fmt.Sprintf("(1/(%s))", other.Content)
-	return v.Multiply(other)
+	v.Content = fmt.Sprintf("((%s)/(%s))", v.Content, other.Content)
+	v.Sign = other.Sign && v.Sign
+	return v
 }
 
 // add
@@ -28,7 +29,7 @@ func (v Value) Plus(other Value) Value {
 	localSignOtherStr = GetSign(true == other.Sign)
 	localSignCurrentStr = GetSign(v.Sign)
 
-	v.Content = fmt.Sprintf("(%s1(%s)%s1(%s))", localSignCurrentStr, v.Content, localSignOtherStr, other.Content)
+	v.Content = fmt.Sprintf("(%s1*(%s)*%s1*(%s))", localSignCurrentStr, v.Content, localSignOtherStr, other.Content)
 	return v
 }
 
@@ -41,12 +42,16 @@ func (v Value) Minus(other Value) Value {
 	localSignOtherStr = GetSign(false == other.Sign)
 	localSignCurrentStr = GetSign(v.Sign)
 
-	v.Content = fmt.Sprintf("(%s1(%s)%s1(%s))", localSignCurrentStr, v.Content, localSignOtherStr, other.Content)
+	v.Content = fmt.Sprintf("(%s1*(%s)*%s1*(%s))", localSignCurrentStr, v.Content, localSignOtherStr, other.Content)
 	return v
 }
 
 func (v Value) String() string {
-	return fmt.Sprintf("%s1(%s)", GetSign(v.Sign), v.Content)
+	return fmt.Sprintf("%s1*(%s)", GetSign(v.Sign), v.Content)
+}
+
+func (v Value) StringFinal() string {
+	return fmt.Sprintf("%s", v.Content)
 }
 
 func GetSign(sign bool) string {

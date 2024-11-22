@@ -1,6 +1,9 @@
 package processor
 
-import "KramerSolve/internal/models"
+import (
+	"KramerSolve/internal/models"
+	"log"
+)
 
 // KramerRangFour - function which count matrix equal by Kramer Method
 // This is function which counts matrix 4x4
@@ -28,12 +31,35 @@ func KramerRangFour(x, y, z, k, res []models.Value) []models.Value {
 
 	det := KramerDetFour(x, y, z, k)
 
-	x_res := KramerDetFour(x1, y1, z1, k1).Divide(det)
-	y_res := KramerDetFour(x2, y2, z2, k2).Divide(det)
-	z_res := KramerDetFour(x3, y3, z3, k3).Divide(det)
-	k_res := KramerDetFour(x4, y4, z4, k4).Divide(det)
+	log.Printf("********************************")
+	log.Printf("det: %v", det.StringFinal())
+	log.Printf("********************************")
 
-	return []models.Value{x_res, y_res, z_res, k_res}
+	x_res := KramerDetFour(x1, y1, z1, k1)
+
+	log.Printf("********************************")
+	log.Printf("x_res: %v", x_res.StringFinal())
+	log.Printf("********************************")
+
+	y_res := KramerDetFour(x2, y2, z2, k2)
+
+	log.Printf("********************************")
+	log.Printf("y_res: %v", y_res.StringFinal())
+	log.Printf("********************************")
+
+	z_res := KramerDetFour(x3, y3, z3, k3)
+
+	log.Printf("********************************")
+	log.Printf("z_res: %v", z_res.StringFinal())
+	log.Printf("********************************")
+
+	k_res := KramerDetFour(x4, y4, z4, k4)
+
+	log.Printf("********************************")
+	log.Printf("k_res: %v", k_res.StringFinal())
+	log.Printf("********************************")
+
+	return nil
 }
 
 func KramerDetFour(x, y, z, k []models.Value) models.Value {
